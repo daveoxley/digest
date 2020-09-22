@@ -22,7 +22,7 @@ func ExampleDigest() {
 	req, _ := http.NewRequest(http.MethodGet, "http://httpbin.org/digest-auth/auth/foo/bar/SHA-512", nil)
 	res, _ := http.DefaultClient.Do(req)
 	// Create digest credentials from the request challenge
-	chal, _ := digest.FindChallenge(res.Header)
+	chal, _ := digest.FindChallenge(res.Header, "")
 	cred, _ := digest.Digest(chal, digest.Options{
 		Method: req.Method,
 		URI: req.URL.RequestURI(),
