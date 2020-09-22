@@ -131,9 +131,12 @@ func (c *Challenge) String() string {
 }
 
 // FindChallenge returns the first supported challenge in the headers
-func FindChallenge(h http.Header) (*Challenge, error) {
+func FindChallenge(h http.Header, header string) (*Challenge, error) {
 	var last error
-	for _, header := range h.Values("WWW-Authenticate") {
+	if len(header) == 0 {
+		header = "WWW-Authenticate"
+	}
+	for _, header := range h.Values(header) {
 		if !IsDigest(header) {
 			continue
 		}

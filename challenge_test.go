@@ -66,7 +66,7 @@ func TestFindChallenge(t *testing.T) {
 	headers.Add("WWW-Authenticate", bad1.String())
 	headers.Add("WWW-Authenticate", bad2.String())
 	headers.Add("WWW-Authenticate", good.String())
-	chal, err := FindChallenge(headers)
+	chal, err := FindChallenge(headers, "")
 	assert.NilError(t, err)
 	assert.DeepEqual(t, chal, good)
 }
